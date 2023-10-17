@@ -6,6 +6,8 @@ import org.springframework.stereotype.Service;
 
 import com.neki.skill.dto.UserSkillsDto;
 import com.neki.skill.entities.UserSkills;
+import com.neki.skill.exceptions.ResourceBadRequestException;
+import com.neki.skill.exceptions.ResourceNotFoundException;
 import com.neki.skill.repositories.UserSkillsRepository;
 
 @Service
@@ -22,14 +24,31 @@ public class UserSkillsService {
 
     public UserSkills saveUserSkills(UserSkillsDto userSkillsDto) {
         UserSkills userSkills = converterDtoParaEntity(userSkillsDto);
-        return userSkillsRepository.save(userSkills);
+        UserSkills existingUserSkill = userSkillsRepository.findByUsersAndSkills(userSkills.getUsers(), userSkills.getSkills());
+        if (existingUserSkill != null) {
+            throw new ResourceBadRequestException("Este usuário já possui essa habilidade."); 
+        } else if (userSkills.getUsers() == null) {
+            throw new ResourceBadRequestException("O idUsers é obrigatório!");
+        } else if (userSkills.getSkills() == null) {
+            throw new ResourceBadRequestException("O idSkills é obrigatório!");
+        } else if (userSkills.getLevel() == null) {
+            throw new ResourceBadRequestException("Favor preencher o campo Level!");
+        } else {
+            return userSkillsRepository.save(userSkills);
+        }
+        
     }
 
-    public UserSkills updatUserSkills(UserSkillsDto userSkillsDto, Long idUserSkills) throws NotFoundException {
+    public UserSkills updateUserSkills(UserSkillsDto userSkillsDto, Long idUserSkills) {
         UserSkills userSkillsExistente = userSkillsRepository.findById(idUserSkills)
-                .orElseThrow(() -> new NotFoundException());
-        userSkillsExistente.setLevel(userSkillsDto.getLevel());
-        return userSkillsRepository.save(userSkillsExistente);
+            .orElseThrow(() -> new ResourceNotFoundException("Usuário não encontrado!"));
+            userSkillsExistente.setLevel(userSkillsDto.getLevel());
+        if (userSkillsExistente.getLevel() == null) {
+            throw new ResourceBadRequestException("Favor preencher o Level!");
+        } else {
+            return userSkillsRepository.save(userSkillsExistente);
+        }
+        
     }
 
     public void deleteUserSkills(Long idUserSkills) throws NotFoundException {
