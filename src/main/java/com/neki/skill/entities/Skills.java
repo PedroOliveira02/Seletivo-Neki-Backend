@@ -33,7 +33,8 @@ public class Skills {
     @Column
     private String nome;
 
-    @Column String descricao;
+    @Column 
+    private String descricao;
 
     @OneToMany(mappedBy = "skills")
     private List<UserSkills> skill;
