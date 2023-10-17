@@ -30,8 +30,10 @@ public class UserSkillsController {
 
     @PutMapping("/{idUserSkills}")
     public ResponseEntity<?> updateUserSkills(@RequestBody UserSkillsDto userSkillsDto, @PathVariable Long idUserSkills) throws Exception {
-        UserSkills userSkills = userSkillsService.updatUserSkills(userSkillsDto, idUserSkills);
-        return new ResponseEntity<>(userSkills, HttpStatus.OK);
+        userSkillsService.updateUserSkills(userSkillsDto, idUserSkills);
+        return new ResponseEntity<>(HttpStatus.OK);
+        // userSkillsService.updatUserSkills(userSkillsDto, idUserSkills);
+        // return ResponseEntity.ok().build();
     }
 
     @DeleteMapping("/{idUserSkills}")
