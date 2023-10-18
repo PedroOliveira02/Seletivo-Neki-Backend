@@ -53,7 +53,7 @@ public class UserSkillsService {
 
     public void deleteUserSkills(Long idUserSkills) throws NotFoundException {
         userSkillsRepository.findById(idUserSkills)
-            .orElseThrow(() -> new NotFoundException());
+            .orElseThrow(() -> new ResourceNotFoundException("Skill de usuário não encontrado!"));
         userSkillsRepository.deleteById(idUserSkills);
     }
 

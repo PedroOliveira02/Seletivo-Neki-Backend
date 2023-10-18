@@ -1,13 +1,19 @@
 spring:
     datasource:
         driver-class-name: org.postgresql.Driver
-        url: jdbc:postgresql://localhost:5432/skill?useTimezone=true&serverTimezone=UTC
+        url: jdbc:postgresql://localhost:5432/skill?useTimezone=true&serverTimezone=America/Sao_Paulo
         username: postgres
         password: admin123
     jpa:
         hibernate:
-            ddl-auto: update
+            ddl-auto: create
         properties:
             hibernate:
                 dialect: org.hibernate.dialect.PostgreSQLDialect
+api:
+    security:
+        token:
+            secret: ${JWT_SECRET:my-secret-key}
+
+
 
