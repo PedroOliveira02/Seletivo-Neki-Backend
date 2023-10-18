@@ -38,7 +38,7 @@ public class UsersService {
     public List<UserSkillByIdDto> finUserSkillsByIdUsers(Long idUsers) {
         List<UserSkills> userSkills = usersRepository.findByUsersId(idUsers);
         if (userSkills.isEmpty()) {
-            throw new ResourceNotFoundException("Usuário não encontrado!");
+            throw new ResourceNotFoundException("Usuário sem skill ou não encontrado!");
         }
         List<UserSkillByIdDto> userSkillsDto = new ArrayList<>();
 

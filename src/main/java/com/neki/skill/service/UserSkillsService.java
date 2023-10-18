@@ -33,6 +33,8 @@ public class UserSkillsService {
             throw new ResourceBadRequestException("O idSkills é obrigatório!");
         } else if (userSkills.getLevel() == null) {
             throw new ResourceBadRequestException("Favor preencher o campo Level!");
+        } else if (userSkills.getLevel() < 1 || userSkills.getLevel() > 10) {
+            throw new ResourceBadRequestException("Favor insira um level válido entre 1 e 10!");
         } else {
             return userSkillsRepository.save(userSkills);
         }
@@ -40,13 +42,15 @@ public class UserSkillsService {
     }
 
     public UserSkills updateUserSkills(UserSkillsDto userSkillsDto, Long idUserSkills) {
-        UserSkills userSkillsExistente = userSkillsRepository.findById(idUserSkills)
+        UserSkills userSkills = userSkillsRepository.findById(idUserSkills)
             .orElseThrow(() -> new ResourceNotFoundException("Usuário não encontrado!"));
-            userSkillsExistente.setLevel(userSkillsDto.getLevel());
-        if (userSkillsExistente.getLevel() == null) {
+            userSkills.setLevel(userSkillsDto.getLevel());
+        if (userSkills.getLevel() == null) {
             throw new ResourceBadRequestException("Favor preencher o Level!");
+        } else if (userSkills.getLevel() < 1 || userSkills.getLevel() > 10) {
+            throw new ResourceBadRequestException("Favor insira um level válido entre 1 e 10!");
         } else {
-            return userSkillsRepository.save(userSkillsExistente);
+            return userSkillsRepository.save(userSkills);
         }
         
     }

@@ -8,6 +8,8 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -23,13 +25,15 @@ import lombok.Setter;
 @Entity
 @Table(name = "user_skills")
 public class UserSkills {
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_user-skills")
     private Long idUserSkill;
 
-    @Column
+    @Column(nullable = false)
+    @Min(1)
+    @Max(10)
     private Integer level;
 
     @ManyToOne

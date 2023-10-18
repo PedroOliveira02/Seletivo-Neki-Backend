@@ -35,10 +35,10 @@ public class Users implements UserDetails {
     @Column(name = "id_users")
     private Long idUsers;
     
-    @Column(name = "login")
+    @Column(nullable = false, length = 80)
     private String login;
 
-    @Column(name = "password")
+    @Column(nullable = false, length = 80)
     private String password;
 
     @OneToMany(mappedBy = "users")

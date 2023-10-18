@@ -30,10 +30,10 @@ public class Skills {
     @Column(name = "id_skills")
     private Long idSkills;
 
-    @Column
+    @Column(nullable = false, length = 80)
     private String nome;
 
-    @Column 
+    @Column(nullable = false, length = 500)
     private String descricao;
 
     @OneToMany(mappedBy = "skills")
