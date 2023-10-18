@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 import com.neki.skill.dto.UserSkillByIdDto;
@@ -21,7 +22,7 @@ public class UsersService {
     @Autowired
     UsersRepository usersRepository;
 
-    public Users saveUsers(UsersDto usersDto) {
+    public UserDetails saveUsers(UsersDto usersDto) {
         ValidarLogin(usersDto.getLogin());
         Users users = converterDtoParaEntity(usersDto);
         if (users.getLogin().isEmpty()) {
@@ -63,9 +64,9 @@ public class UsersService {
     }
 
     public void ValidarLogin(String login) {
-        Users users = usersRepository.findByLogin(login);
+        UserDetails users = usersRepository.findByLogin(login);
         if (users != null) {
-            throw new ResourceBadRequestException("Login existente!");
+            throw new ResourceBadRequestException("Login já cadastrado!");
         }
     }
 }
