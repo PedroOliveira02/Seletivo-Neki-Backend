@@ -8,7 +8,7 @@ import com.neki.skill.repositories.UsersRepository;
 
 @Component
 public class UsersDataLoader implements ApplicationRunner {
-    
+
     private final UsersRepository usersRepository;
 
     public UsersDataLoader(UsersRepository usersRepository) {

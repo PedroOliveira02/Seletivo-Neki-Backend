@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.neki.skill.dto.UserSkillByIdDto;
@@ -18,21 +19,23 @@ import com.neki.skill.repositories.UsersRepository;
 
 @Service
 public class UsersService {
-    
+
     @Autowired
     UsersRepository usersRepository;
 
     public UserDetails saveUsers(UsersDto usersDto) {
         ValidarLogin(usersDto.getLogin());
-        Users users = converterDtoParaEntity(usersDto);
-        if (users.getLogin().isEmpty()) {
+        if (usersDto.getLogin().isEmpty()) {
             throw new ResourceBadRequestException("Favor preencher o campo Login!");
-        } else if (users.getPassword().isEmpty()) {
+        } else if (usersDto.getPassword().isEmpty()) {
             throw new ResourceBadRequestException("Favor preencher o campo Password!");
         } else {
+            String encryptedPassword = new BCryptPasswordEncoder().encode(usersDto.getPassword());
+            usersDto.setPassword(encryptedPassword);
+            Users users = converterDtoParaEntity(usersDto);
             return usersRepository.save(users);
         }
-        
+
     }
 
     public List<UserSkillByIdDto> finUserSkillsByIdUsers(Long idUsers) {
@@ -70,4 +73,3 @@ public class UsersService {
         }
     }
 }
-

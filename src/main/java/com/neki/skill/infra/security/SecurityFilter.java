@@ -25,6 +25,10 @@ public class SecurityFilter extends OncePerRequestFilter {
     @Autowired
     UsersRepository usersRepository;
 
+    public void token(String token) {
+
+    }
+
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
             throws ServletException, IOException {
@@ -40,8 +44,9 @@ public class SecurityFilter extends OncePerRequestFilter {
 
     private String recoverToken(HttpServletRequest request) {
         var authHeader = request.getHeader("Authorization");
-        if (authHeader == null) return null;
-            return authHeader.replace("Bearer ", "");
+        if (authHeader == null)
+            return null;
+        return authHeader.replace("Bearer ", "");
     }
-    
+
 }

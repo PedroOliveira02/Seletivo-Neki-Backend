@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 import com.neki.skill.repositories.UsersRepository;
 
 @Service
-public class AuthorizationService implements UserDetailsService{
+public class AuthorizationService implements UserDetailsService {
 
     @Autowired
     UsersRepository usersRepository;
@@ -18,5 +18,5 @@ public class AuthorizationService implements UserDetailsService{
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         return usersRepository.findByLogin(username);
     }
-    
+
 }

@@ -21,74 +21,74 @@ import com.neki.skill.exceptions.UnauthorizedException;
 @RestController
 public class CustomizeExceptionHandler extends ResponseEntityExceptionHandler {
 
-    @ExceptionHandler(Exception.class)
-    public final ResponseEntity<ExceptionResponse> handleAllExceptions(
-            Exception ex, WebRequest request) {
+        @ExceptionHandler(Exception.class)
+        public final ResponseEntity<ExceptionResponse> handleAllExceptions(
+                        Exception ex, WebRequest request) {
 
-        String dataHora = ConversorDataHora.converterDateParaDataHora(new Date());
+                String dataHora = ConversorDataHora.converterDateParaDataHora(new Date());
 
-        ExceptionResponse exceptionResponse = new ExceptionResponse(
-                dataHora,
-                ex.getMessage(),
-                request.getDescription(false));
+                ExceptionResponse exceptionResponse = new ExceptionResponse(
+                                dataHora,
+                                ex.getMessage(),
+                                request.getDescription(false));
 
-        return new ResponseEntity<>(exceptionResponse, HttpStatus.INTERNAL_SERVER_ERROR);
-    }
+                return new ResponseEntity<>(exceptionResponse, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
 
-    @ExceptionHandler(ResourceNotFoundException.class)
-    public final ResponseEntity<ExceptionResponse> handleNotFoundExceptions(
-            Exception ex, WebRequest request) {
+        @ExceptionHandler(ResourceNotFoundException.class)
+        public final ResponseEntity<ExceptionResponse> handleNotFoundExceptions(
+                        Exception ex, WebRequest request) {
 
-        String dataHora = ConversorDataHora.converterDateParaDataHora(new Date());
+                String dataHora = ConversorDataHora.converterDateParaDataHora(new Date());
 
-        ExceptionResponse exceptionResponse = new ExceptionResponse(
-                dataHora,
-                ex.getMessage(),
-                request.getDescription(false));
+                ExceptionResponse exceptionResponse = new ExceptionResponse(
+                                dataHora,
+                                ex.getMessage(),
+                                request.getDescription(false));
 
-        return new ResponseEntity<>(exceptionResponse, HttpStatus.NOT_FOUND);
-    }
+                return new ResponseEntity<>(exceptionResponse, HttpStatus.NOT_FOUND);
+        }
 
-    @ExceptionHandler(ResourceBadRequestException.class)
-    public final ResponseEntity<ExceptionResponse> handleBadRequestExceptions(
-            Exception ex, WebRequest request) {
+        @ExceptionHandler(ResourceBadRequestException.class)
+        public final ResponseEntity<ExceptionResponse> handleBadRequestExceptions(
+                        Exception ex, WebRequest request) {
 
-        String dataHora = ConversorDataHora.converterDateParaDataHora(new Date());
+                String dataHora = ConversorDataHora.converterDateParaDataHora(new Date());
 
-        ExceptionResponse exceptionResponse = new ExceptionResponse(
-                dataHora,
-                ex.getMessage(),
-                request.getDescription(false));
+                ExceptionResponse exceptionResponse = new ExceptionResponse(
+                                dataHora,
+                                ex.getMessage(),
+                                request.getDescription(false));
 
-        return new ResponseEntity<>(exceptionResponse, HttpStatus.BAD_REQUEST);
-    }
+                return new ResponseEntity<>(exceptionResponse, HttpStatus.BAD_REQUEST);
+        }
 
-    @ExceptionHandler(UnauthorizedException.class)
-    public final ResponseEntity<ExceptionResponse> handleUnauthorizedExceptions(
-            Exception ex, WebRequest request) {
+        @ExceptionHandler(UnauthorizedException.class)
+        public final ResponseEntity<ExceptionResponse> handleUnauthorizedExceptions(
+                        Exception ex, WebRequest request) {
 
-        String dataHora = ConversorDataHora.converterDateParaDataHora(new Date());
+                String dataHora = ConversorDataHora.converterDateParaDataHora(new Date());
 
-        ExceptionResponse exceptionResponse = new ExceptionResponse(
-                dataHora,
-                ex.getMessage(),
-                request.getDescription(false));
+                ExceptionResponse exceptionResponse = new ExceptionResponse(
+                                dataHora,
+                                ex.getMessage(),
+                                request.getDescription(false));
 
-        return new ResponseEntity<>(exceptionResponse, HttpStatus.UNAUTHORIZED);
-    }
+                return new ResponseEntity<>(exceptionResponse, HttpStatus.UNAUTHORIZED);
+        }
 
-    @ExceptionHandler(TokenGenerationException.class)
-    public final ResponseEntity<ExceptionResponse> handleTokenGenerationException(
-            TokenGenerationException ex, WebRequest request) {
+        @ExceptionHandler(TokenGenerationException.class)
+        public final ResponseEntity<ExceptionResponse> handleTokenGenerationException(
+                        TokenGenerationException ex, WebRequest request) {
 
-        String dataHora = ConversorDataHora.converterDateParaDataHora(new Date());
+                String dataHora = ConversorDataHora.converterDateParaDataHora(new Date());
 
-        ExceptionResponse exceptionResponse = new ExceptionResponse(
-                dataHora,
-                ex.getMessage(),
-                request.getDescription(false));
+                ExceptionResponse exceptionResponse = new ExceptionResponse(
+                                dataHora,
+                                ex.getMessage(),
+                                request.getDescription(false));
 
-        return new ResponseEntity<>(exceptionResponse, HttpStatus.INTERNAL_SERVER_ERROR);
-    }
+                return new ResponseEntity<>(exceptionResponse, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
 
 }

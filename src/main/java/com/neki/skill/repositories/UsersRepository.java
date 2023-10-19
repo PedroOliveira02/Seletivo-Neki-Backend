@@ -15,5 +15,5 @@ public interface UsersRepository extends JpaRepository<Users, Long> {
 
     @Query(value = "SELECT us FROM UserSkills us WHERE us.users.idUsers = :idUsers")
     List<UserSkills> findByUsersId(@Param("idUsers") Long idUsers);
-    
+
 }

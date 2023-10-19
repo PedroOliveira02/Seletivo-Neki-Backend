@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.neki.skill.dto.SkillsDto;
 import com.neki.skill.entities.Skills;
 import com.neki.skill.exceptions.ResourceBadRequestException;
+import com.neki.skill.infra.security.TokenService;
 import com.neki.skill.repositories.SkillsRepository;
 
 @Service
@@ -16,6 +17,9 @@ public class SkillsService {
 
     @Autowired
     SkillsRepository skillsRepository;
+
+    @Autowired
+    TokenService tokenService;
 
     public List<SkillsDto> getAllSkills() {
         return skillsRepository.findAll()
@@ -26,6 +30,7 @@ public class SkillsService {
 
     public Skills saveSkills(SkillsDto skillsDto) {
         ValidarNomeSkill(skillsDto.getNome());
+
         Skills skills = converterDtoParaEntity(skillsDto);
         if (skills.getNome().isEmpty()) {
             throw new ResourceBadRequestException("Favor preencher o campo nome!");
@@ -33,7 +38,8 @@ public class SkillsService {
             throw new ResourceBadRequestException("Favor preencher o campo descrição!");
         } else {
             return skillsRepository.save(skills);
-        } 
+        }
+
     }
 
     public SkillsDto converterEntityParaDto(Skills skills) {

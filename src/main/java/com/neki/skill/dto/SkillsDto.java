@@ -9,7 +9,7 @@ import lombok.Setter;
 @NoArgsConstructor
 
 public class SkillsDto {
-    
+
     private Long idSkills;
 
     private String nome;

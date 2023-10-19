@@ -29,12 +29,12 @@ import lombok.Setter;
 @Entity
 @Table(name = "users")
 public class Users implements UserDetails {
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_users")
     private Long idUsers;
-    
+
     @Column(nullable = false, length = 80)
     private String login;
 

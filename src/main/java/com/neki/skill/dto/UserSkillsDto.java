@@ -9,7 +9,7 @@ import lombok.Setter;
 @NoArgsConstructor
 
 public class UserSkillsDto {
-    
+
     private Long idUserSkills;
 
     private Integer level;

@@ -9,7 +9,7 @@ import lombok.Setter;
 @NoArgsConstructor
 
 public class UsersDto {
-    
+
     private Long idUsers;
 
     private String login;

@@ -24,9 +24,10 @@ public class UserSkillsService {
 
     public UserSkills saveUserSkills(UserSkillsDto userSkillsDto) {
         UserSkills userSkills = converterDtoParaEntity(userSkillsDto);
-        UserSkills existingUserSkill = userSkillsRepository.findByUsersAndSkills(userSkills.getUsers(), userSkills.getSkills());
+        UserSkills existingUserSkill = userSkillsRepository.findByUsersAndSkills(userSkills.getUsers(),
+                userSkills.getSkills());
         if (existingUserSkill != null) {
-            throw new ResourceBadRequestException("Este usuário já possui essa habilidade."); 
+            throw new ResourceBadRequestException("Este usuário já possui essa habilidade.");
         } else if (userSkills.getUsers() == null) {
             throw new ResourceBadRequestException("O idUsers é obrigatório!");
         } else if (userSkills.getSkills() == null) {
@@ -34,30 +35,30 @@ public class UserSkillsService {
         } else if (userSkills.getLevel() == null) {
             throw new ResourceBadRequestException("Favor preencher o campo Level!");
         } else if (userSkills.getLevel() < 1 || userSkills.getLevel() > 10) {
-            throw new ResourceBadRequestException("Favor insira um level válido entre 1 e 10!");
+            throw new ResourceBadRequestException("Favor insira um level entre 1 e 10!");
         } else {
             return userSkillsRepository.save(userSkills);
         }
-        
+
     }
 
     public UserSkills updateUserSkills(UserSkillsDto userSkillsDto, Long idUserSkills) {
         UserSkills userSkills = userSkillsRepository.findById(idUserSkills)
-            .orElseThrow(() -> new ResourceNotFoundException("Usuário não encontrado!"));
-            userSkills.setLevel(userSkillsDto.getLevel());
+                .orElseThrow(() -> new ResourceNotFoundException("Usuário não encontrado!"));
+        userSkills.setLevel(userSkillsDto.getLevel());
         if (userSkills.getLevel() == null) {
             throw new ResourceBadRequestException("Favor preencher o Level!");
         } else if (userSkills.getLevel() < 1 || userSkills.getLevel() > 10) {
-            throw new ResourceBadRequestException("Favor insira um level válido entre 1 e 10!");
+            throw new ResourceBadRequestException("Favor insira um level entre 1 e 10!");
         } else {
             return userSkillsRepository.save(userSkills);
         }
-        
+
     }
 
     public void deleteUserSkills(Long idUserSkills) throws NotFoundException {
         userSkillsRepository.findById(idUserSkills)
-            .orElseThrow(() -> new ResourceNotFoundException("Skill de usuário não encontrado!"));
+                .orElseThrow(() -> new ResourceNotFoundException("Skill de usuário não encontrado!"));
         userSkillsRepository.deleteById(idUserSkills);
     }
 
