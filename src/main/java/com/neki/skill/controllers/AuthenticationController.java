@@ -44,8 +44,10 @@ public class AuthenticationController {
         try {
             var usernamePassword = new UsernamePasswordAuthenticationToken(data.login(), data.password());
             var auth = this.authenticationManager.authenticate(usernamePassword);
-            var token = tokenService.generateToken((Users) auth.getPrincipal());
-            return ResponseEntity.ok(new LoginResponseDto(token));
+            var userDetails = (Users) auth.getPrincipal();
+            var idUsers = userDetails.getIdUsers();
+            var token = tokenService.generateToken(userDetails);
+            return ResponseEntity.ok(new LoginResponseDto(idUsers, token));
         } catch (AuthenticationException e) {
             throw new ResourceBadRequestException("Credenciais inválidas. Verifique seu login e password!");
         }
