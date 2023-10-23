@@ -21,7 +21,7 @@ public class UsersDataLoader implements ApplicationRunner {
             Users users = new Users();
             users.setLogin("Pedro");
             users.setPassword("$2a$10$x6Ptj5f5kTptDgIrbtDnbOd0YRAFrHqZJa47P3OCxaEYrHtmijuba");
-            // Senha descriptografada para acesso com user ja criado: 12345
+            // Senha descriptografada para acesso com user ja criado: "12345"
             usersRepository.save(users);
         }
     }
