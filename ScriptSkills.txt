@@ -1,0 +1,12 @@
+-- public.skills definition
+
+-- Drop table
+
+-- DROP TABLE public.skills;
+
+CREATE TABLE public.skills (
+	id_skills bigserial NOT NULL,
+	descricao varchar(500) NOT NULL,
+	nome varchar(80) NOT NULL,
+	CONSTRAINT skills_pkey PRIMARY KEY (id_skills)
+);

@@ -1,0 +1,12 @@
+-- public.users definition
+
+-- Drop table
+
+-- DROP TABLE public.users;
+
+CREATE TABLE public.users (
+	id_users bigserial NOT NULL,
+	login varchar(80) NOT NULL,
+	"password" varchar(80) NOT NULL,
+	CONSTRAINT users_pkey PRIMARY KEY (id_users)
+);

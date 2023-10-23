@@ -1,0 +1,20 @@
+-- public.user_skills definition
+
+-- Drop table
+
+-- DROP TABLE public.user_skills;
+
+CREATE TABLE public.user_skills (
+	"id_user-skills" bigserial NOT NULL,
+	"level" int4 NOT NULL,
+	id_skills int8 NULL,
+	id_users int8 NULL,
+	CONSTRAINT user_skills_level_check CHECK (((level >= 1) AND (level <= 10))),
+	CONSTRAINT user_skills_pkey PRIMARY KEY ("id_user-skills")
+);
+
+
+-- public.user_skills foreign keys
+
+ALTER TABLE public.user_skills ADD CONSTRAINT fkmpui42efmmu7w3y9mb54csu8v FOREIGN KEY (id_users) REFERENCES public.users(id_users);
+ALTER TABLE public.user_skills ADD CONSTRAINT fkso9a4skctsmi5jywhyv134a7l FOREIGN KEY (id_skills) REFERENCES public.skills(id_skills);
